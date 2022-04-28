@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 
 public class MainScene extends Main {
 
-    private static Scene characterScene;
+    private static Scene gameScene;
 
     public static Scene createMainScene() {
         // Create a grid and add space between the cells
@@ -42,8 +42,8 @@ public class MainScene extends Main {
 
         playBtn.setOnAction( e -> {
             System.out.println("HI");
-            characterScene = CharacterScene.createCharacterScene();
-            switchScenes(characterScene);
+            gameScene = GameScene.createGameScene();
+            switchScenes(gameScene);
         });
 
         // Button to Display the Rules
