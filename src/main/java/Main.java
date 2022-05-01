@@ -1,17 +1,6 @@
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.*;
-import javafx.geometry.Insets;
-import javafx.scene.shape.Rectangle;
 
 public class Main extends Application {
 
@@ -21,24 +10,30 @@ public class Main extends Application {
      */
 
     private static Stage stage;
-    private Scene mainScene = MainScene.createMainScene();
 
     @Override
     public void start(Stage stage) {
 
         Main.stage = stage;
         stage.setTitle("Higher or Lower");
-        switchScenes(mainScene);
+        switchMainScene();
         stage.show();
-
-
-
     }
 
-    public static void switchScenes(Scene scene) {
-        stage.setScene(scene);
+    public static void switchMainScene() {
+        Scene mainScene = MainScene.createMainScene();
+        stage.setScene(mainScene);
     }
 
+    public static void switchCharacterScene() {
+        Scene characterScene = CharacterScene.createCharacterScene();
+        stage.setScene(characterScene);
+    }
+
+    public static void switchGameScene(){
+        Scene gameScene = GameScene.createGameScene();
+        stage.setScene(gameScene);
+    }
     public static void main(String[] args) {
         launch();
     }

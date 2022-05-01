@@ -33,7 +33,7 @@ public class GameScene extends Main {
         // Title Label
         Label title = new Label("Higher or Lower");
         GridPane.setConstraints(title, 1, 0);
-        title.setAlignment(Pos.CENTER);
+        title.setAlignment(Pos.BASELINE_CENTER);
         title.setFont(Font.font("Cambria", 64));
         title.setTextFill(Color.web("#0076a3"));
 
