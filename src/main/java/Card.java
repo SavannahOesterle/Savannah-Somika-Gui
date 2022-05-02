@@ -46,4 +46,9 @@ public class Card {
         label.setText ((String.valueOf(value)));
     }
 
+    public static void unflipCard(ImageView imageview) {
+        Image unflippedCard = new Image("Unflipped.png");
+        imageview.setImage(unflippedCard);
+    }
+
 }

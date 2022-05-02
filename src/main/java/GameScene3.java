@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 
 public class GameScene3 extends Main {
 
+    public static int firstValue;
     public static int secondValue;
 
     public static Scene createGameScene() {
@@ -67,7 +68,12 @@ public class GameScene3 extends Main {
         startBtn.setTextFill(Paint.valueOf("#0076a3"));
         startBtn.setFont(Font.font("Cambria", 24));
 
-        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn);
+        Button resetBtn = new Button ("Play Again?");
+        resetBtn.setTextFill(Paint.valueOf("#0076a3"));
+        resetBtn.setFont(Font.font("Cambria", 24));
+        resetBtn.setVisible(false);
+
+        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn, resetBtn);
         opponentMessage.setAlignment(Pos.CENTER_LEFT);
         GridPane.setConstraints(opponentMessage, 2, 0);
 
@@ -86,9 +92,11 @@ public class GameScene3 extends Main {
         firstCardValue.setFont(Font.font("Cambria", 72));
 
         startBtn.setOnAction(e -> {
-            int firstValue = Card.FirstCard();
+            startBtn.setVisible(false);
+            firstValue = Card.FirstCard();
             secondValue = Card.SecondCard(firstValue);
             Card.flipCard(firstCard, firstValue, firstCardValue);
+            Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
         });
 
         firstCardStack.getChildren().addAll(firstCard, firstCardValue);
@@ -128,9 +136,44 @@ public class GameScene3 extends Main {
         secondCardValue.setFont(Font.font("Cambria", 72));
 
 
-        higherBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
+        higherBtn.setOnAction(e -> {
+            Card.flipCard(secondCard, secondValue, secondCardValue);
+            secondCardValue.setVisible(true);
+            if(firstValue < secondValue) {
+                Scoring.updateHappyLoppy(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            } else {
+                Scoring.updateSadLoppy(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            }
+        });
 
-        lowerBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
+        lowerBtn.setOnAction(e -> {
+            Card.flipCard(secondCard, secondValue, secondCardValue);
+            secondCardValue.setVisible(true);
+            if(firstValue > secondValue) {
+                Scoring.updateHappyLoppy(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            } else {
+                Scoring.updateSadLoppy(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            }
+        });
+
+        resetBtn.setOnAction(e -> {
+            resetBtn.setVisible(false);
+            Scoring.resetLoppy(opponent);
+            Scoring.resetGame(secondCard);
+            secondCardValue.setVisible(false);
+            firstValue = Card.FirstCard();
+            secondValue = Card.SecondCard(firstValue);
+            Card.flipCard(firstCard, firstValue, firstCardValue);
+            Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
+        });
 
         secondCardStack.getChildren().addAll(secondCard, secondCardValue);
         GridPane.setConstraints(secondCardStack, 2, 1);

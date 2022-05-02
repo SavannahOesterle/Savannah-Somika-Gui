@@ -1,4 +1,3 @@
-import com.sun.jdi.IntegerValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,9 +12,10 @@ import javafx.scene.text.Font;
 
 public class GameScene extends Main {
 
+    public static int firstValue;
     public static int secondValue;
 
-    public static <secondValue> Scene createGameScene() {
+    public static Scene createGameScene() {
 
         // Create a grid and add space between the cells
         GridPane gridpane = new GridPane();
@@ -66,9 +66,15 @@ public class GameScene extends Main {
         startBtn.setTextFill(Paint.valueOf("#0076a3"));
         startBtn.setFont(Font.font("Cambria", 24));
 
+        Button resetBtn = new Button ("Play Again?");
+        resetBtn.setTextFill(Paint.valueOf("#0076a3"));
+        resetBtn.setFont(Font.font("Cambria", 24));
+        resetBtn.setVisible(false);
+
+
 
         // Add all parts of opponent's text to the VBox
-        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn);
+        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn, resetBtn);
         opponentMessage.setAlignment(Pos.CENTER_LEFT);
         GridPane.setConstraints(opponentMessage, 2, 0);
 
@@ -87,9 +93,11 @@ public class GameScene extends Main {
         firstCardValue.setFont(Font.font("Cambria", 72));
 
         startBtn.setOnAction(e -> {
-            int firstValue = Card.FirstCard();
+            startBtn.setVisible(false);
+            firstValue = Card.FirstCard();
             secondValue = Card.SecondCard(firstValue);
             Card.flipCard(firstCard, firstValue, firstCardValue);
+            Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
         });
 
         firstCardStack.getChildren().addAll(firstCard, firstCardValue);
@@ -129,10 +137,46 @@ public class GameScene extends Main {
         secondCardValue.setFont(Font.font("Cambria", 72));
 
 
-        higherBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
+        higherBtn.setOnAction(e -> {
+            Card.flipCard(secondCard, secondValue, secondCardValue);
+            secondCardValue.setVisible(true);
+            if(firstValue < secondValue) {
+                Scoring.updateHappyBurtle(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            } else {
+                Scoring.updateSadBurtle(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            }
+        });
 
-        lowerBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
 
+        lowerBtn.setOnAction(e -> {
+            Card.flipCard(secondCard, secondValue, secondCardValue);
+            secondCardValue.setVisible(true);
+            if(firstValue > secondValue) {
+                Scoring.updateHappyBurtle(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            } else {
+                Scoring.updateSadBurtle(opponent);
+                Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
+                resetBtn.setVisible(true);
+            }
+
+        });
+
+        resetBtn.setOnAction(e -> {
+            resetBtn.setVisible(false);
+            Scoring.resetBurtle(opponent);
+            Scoring.resetGame(secondCard);
+            secondCardValue.setVisible(false);
+            firstValue = Card.FirstCard();
+            secondValue = Card.SecondCard(firstValue);
+            Card.flipCard(firstCard, firstValue, firstCardValue);
+            Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
+        });
         secondCardStack.getChildren().addAll(secondCard, secondCardValue);
         GridPane.setConstraints(secondCardStack, 2, 1);
 
