@@ -96,6 +96,7 @@ public class GameScene3 extends Main {
         firstCardValue.setAlignment(Pos.CENTER_LEFT);
         firstCardValue.setFont(Font.font("Cambria", 72));
 
+        // When the startBtn is pressed, it generates two card values, flips the first card, and updates the opponent's label to the card value
         startBtn.setOnAction(e -> {
             startBtn.setVisible(false);
             firstValue = Card.FirstCard();
@@ -140,7 +141,7 @@ public class GameScene3 extends Main {
         secondCardValue.setAlignment(Pos.CENTER_LEFT);
         secondCardValue.setFont(Font.font("Cambria", 72));
 
-
+        // When the higher button is pressed, flips the second card and updates the score appropriately
         higherBtn.setOnAction(e -> {
             Card.flipCard(secondCard, secondValue, secondCardValue);
             secondCardValue.setVisible(true);
@@ -159,6 +160,7 @@ public class GameScene3 extends Main {
             }
         });
 
+        // When the lower button is pressed, flips the second card and updates the score appropriately
         lowerBtn.setOnAction(e -> {
             Card.flipCard(secondCard, secondValue, secondCardValue);
             secondCardValue.setVisible(true);
@@ -177,6 +179,7 @@ public class GameScene3 extends Main {
             }
         });
 
+        // When the resetBtn is pressed, it starts another round (same as startBtn)
         resetBtn.setOnAction(e -> {
             resetBtn.setVisible(false);
             currentScore.setVisible(false);

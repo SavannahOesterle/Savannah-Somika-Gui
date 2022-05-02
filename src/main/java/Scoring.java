@@ -54,11 +54,14 @@ public class Scoring {
         Image neutralLoppy = new Image("loppy.png");
         imageview.setImage(neutralLoppy);
     }
+
+    // Method that updates the text of a label
     public static void updateOpponentLabel(Label label, String text, Button button, String text2) {
         label.setText(text);
         button.setText(text2);
     }
 
+    // Method that updates an imageview
     public static void resetGame(ImageView imageview) {
         Card.unflipCard(imageview);
     }

@@ -46,6 +46,7 @@ public class Card {
         label.setText ((String.valueOf(value)));
     }
 
+    // Method that resets the second card
     public static void unflipCard(ImageView imageview) {
         Image unflippedCard = new Image("Unflipped.png");
         imageview.setImage(unflippedCard);
