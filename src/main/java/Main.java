@@ -9,7 +9,7 @@ public class Main extends Application {
      Update all code and comments in this template to suit your own project.
      */
 
-    private static Stage stage;
+    public static Stage stage;
 
     @Override
     public void start(Stage stage) {
@@ -17,6 +17,7 @@ public class Main extends Application {
         Main.stage = stage;
         stage.setTitle("Higher or Lower");
         switchMainScene();
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -33,6 +34,16 @@ public class Main extends Application {
     public static void switchGameScene(){
         Scene gameScene = GameScene.createGameScene();
         stage.setScene(gameScene);
+    }
+
+    public static void switchGameScene2(){
+        Scene gameScene2 = GameScene2.createGameScene();
+        stage.setScene(gameScene2);
+    }
+
+    public static void switchGameScene3(){
+        Scene gameScene3 = GameScene3.createGameScene();
+        stage.setScene(gameScene3);
     }
     public static void main(String[] args) {
         launch();

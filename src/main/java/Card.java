@@ -1,55 +1,49 @@
+import javafx.geometry.Pos;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.Random;
 
 public class Card {
-    private int value;
-    private boolean faceUp;
 
     /**
-     * Constructor that Creates a Card, with 1 as the associated value and face
-     * down.
+     * Constructor that creates the first card
+     * @return a random value between 0 - 9
      */
-    public Card() {
-        value = 0;
-        setFaceUp(false);
-    }
-
-    /**
-     * Method that creates a random card
-     *@return an integer value between 1 - 9
-     */
-    public int shuffle() {
+    public static int FirstCard() {
         Random rand = new Random();
-        value = rand.nextInt(10);
+        int value = rand.nextInt(10);
         return value;
     }
 
     /**
-     * Method that will check if the card is face up or not
-     * @return a boolean
+     * Constructor that creates the second card, based off of the value of the second card
+     * @param value
+     * @return a random value between 0 - 9 and != to the first card
      */
-    public boolean isFaceUp() {
-        return faceUp;
-    }
-
-    /**
-     * Method that flips the card Once a card is turned face up, it remains face up
-     * for the rest of the round
-     */
-    public void setFaceUp(boolean faceUp) {
-        this.faceUp = faceUp;
-    }
-
-    /**
-     * Method that will view the value of the card.
-     * @return a integer value of card if its face is turned upside.
-     */
-    public int viewCard() {
-        if (faceUp)
-            return value;
-        else {
-            System.out.println("Card face is down. Kindly invert.");
-            return -1;
+    public static int SecondCard(int value) {
+        Random rand = new Random();
+        int secondValue = rand.nextInt(10);
+        if (secondValue == value) {
+            while (secondValue == value) {
+                secondValue = rand.nextInt(10);
+            }
         }
+        return secondValue;
+    }
+
+    /**
+     * Method that flips the card
+     * @param imageview to be updated
+     * @param value to be placed on card
+     * @param label to be updated
+     */
+    public static void flipCard(ImageView imageview, int value, Label label) {
+        Image flippedCard = new Image("FlippedCard.png");
+        imageview.setImage(flippedCard);
+        label.setText ((String.valueOf(value)));
     }
 
 }

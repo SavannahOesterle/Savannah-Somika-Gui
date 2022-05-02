@@ -1,124 +1,149 @@
+import com.sun.jdi.IntegerValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 public class GameScene extends Main {
 
-    public static Scene createGameScene() {
+    public static int secondValue;
+
+    public static <secondValue> Scene createGameScene() {
+
         // Create a grid and add space between the cells
         GridPane gridpane = new GridPane();
         gridpane.setPadding(new Insets(10, 10, 10, 10));
-        gridpane.setVgap(100);
+        gridpane.setVgap(10);
         gridpane.setHgap(10);
         gridpane.setAlignment(Pos.CENTER);
 
         // Set the width of the three columns
         ColumnConstraints col1 = new ColumnConstraints();
-        col1.setPercentWidth(25);
+        col1.setPercentWidth(20);
         ColumnConstraints col2 = new ColumnConstraints();
-        col2.setPercentWidth(50);
+        col2.setPercentWidth(60);
         ColumnConstraints col3 = new ColumnConstraints();
-        col3.setPercentWidth(25);
+        col3.setPercentWidth(20);
 
-        // Title Label
-        Label title = new Label("Higher or Lower");
-        GridPane.setConstraints(title, 1, 0);
-        title.setAlignment(Pos.BASELINE_CENTER);
-        title.setFont(Font.font("Cambria", 64));
-        title.setTextFill(Color.web("#0076a3"));
+        // Set the height of the three rows
+        RowConstraints row1 = new RowConstraints();
+        row1.setPercentHeight(30) ;
+        RowConstraints row2 = new RowConstraints();
+        row2.setPercentHeight(40);
+        RowConstraints row3 = new RowConstraints();
+        row3.setPercentHeight(30) ;
 
-        // Placeholder for First Card
-        StackPane firstCardHolder = new StackPane();
+        // ImageView for opponent (center column)
+        ImageView opponent = new ImageView();
+        opponent.setFitHeight(400);
+        opponent.setFitWidth(300);
+        opponent.setPreserveRatio(true);
 
-        Rectangle firstCard = new Rectangle();
-        firstCard.setX(150);
-        firstCard.setY(100);
-        firstCard.setWidth(200);
-        firstCard.setHeight(200);
-        firstCard.setArcWidth(20);
-        firstCard.setArcHeight(20);
-        firstCard.setFill(Paint.valueOf("#0076a3"));
+        Image burtleImage = new Image("burtle.png");
+        opponent.setImage(burtleImage);
+        GridPane.setConstraints(opponent, 1, 0);
 
-        Label firstCardLabel = new Label("?");
-        firstCardLabel.setFont(Font.font("Cambria", 200));
-        firstCardLabel.setTextFill(Color.web("fff"));
-        firstCardLabel.setAlignment(Pos.CENTER);
+        // Vbox with Opponent's Text
+        VBox opponentMessage = new VBox(10);
 
-        firstCardHolder.getChildren().addAll(firstCard, firstCardLabel);
-        firstCardHolder.setAlignment(Pos.CENTER);
-        GridPane.setConstraints(firstCardHolder, 0, 1);
+
+        Label opponentName = new Label("Burtle: ");
+        opponentName.setTextFill(Paint.valueOf("#0076a3"));
+        opponentName.setFont(Font.font("Cambria", 24));
+
+        Label startInstructions = new Label ("Are you ready to start?");
+        startInstructions.setTextFill(Paint.valueOf("#0076a3"));
+        startInstructions.setFont(Font.font("Cambria", 24));
+
+        Button startBtn = new Button ("Let's Go!");
+        startBtn.setTextFill(Paint.valueOf("#0076a3"));
+        startBtn.setFont(Font.font("Cambria", 24));
+
+
+        // Add all parts of opponent's text to the VBox
+        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn);
+        opponentMessage.setAlignment(Pos.CENTER_LEFT);
+        GridPane.setConstraints(opponentMessage, 2, 0);
+
+        // StackPane for first card
+        StackPane firstCardStack = new StackPane();
+
+        Image unflippedCard = new Image("unflipped.png");
+        ImageView firstCard = new ImageView(unflippedCard);
+        firstCard.setFitHeight(800);
+        firstCard.setFitWidth(800);
+        firstCard.setPreserveRatio(true);
+
+        Label firstCardValue = new Label();
+        firstCardValue.setTextFill(Color.web("#0076a3"));
+        firstCardValue.setAlignment(Pos.CENTER_LEFT);
+        firstCardValue.setFont(Font.font("Cambria", 72));
+
+        startBtn.setOnAction(e -> {
+            int firstValue = Card.FirstCard();
+            secondValue = Card.SecondCard(firstValue);
+            Card.flipCard(firstCard, firstValue, firstCardValue);
+        });
+
+        firstCardStack.getChildren().addAll(firstCard, firstCardValue);
+        GridPane.setConstraints(firstCardStack, 0, 1);
 
         // Center Column with higher/lower buttons
-        VBox vbox = new VBox(8);
+        VBox vbox = new VBox(12);
         vbox.setAlignment(Pos.CENTER);
-        Button higherBtn = new Button();
-        higherBtn.setPrefHeight(80);
-        higherBtn.setPrefWidth(80);
-        higherBtn.setStyle("-fx-background-color: #0076a3; -fx-shape: 'M 0 0 50 0 0 50 z'");
-        higherBtn.setRotate(45);
+        Button higherBtn = new Button("Higher");
+        higherBtn.setPrefHeight(40);
+        higherBtn.setMinWidth(150);
 
-        Label buttonLabel = new Label("Higher or Lower?");
+        Label buttonLabel = new Label("or");
         buttonLabel.setFont(Font.font("Cambria", 24));
         buttonLabel.setTextFill(Color.web("#0076a3"));
 
-        Button lowerBtn = new Button();
-        lowerBtn.setPrefHeight(80);
-        lowerBtn.setPrefWidth(80);
-        lowerBtn.setStyle("-fx-background-color: #0076a3; -fx-shape: 'M 0 0 50 0 0 50 z'");
-        lowerBtn.setRotate(225);
+        Button lowerBtn = new Button("Lower");
+        lowerBtn.setPrefHeight(40);
+        lowerBtn.setMinWidth(150);
 
         vbox.getChildren().addAll(higherBtn, buttonLabel, lowerBtn);
         GridPane.setConstraints(vbox, 1, 1);
 
-        // Placeholder for Second Card
-        StackPane secondCardHolder = new StackPane();
 
-        Rectangle secondCard = new Rectangle();
-        secondCard.setX(150);
-        secondCard.setY(100);
-        secondCard.setWidth(200);
-        secondCard.setHeight(200);
-        secondCard.setArcWidth(20);
-        secondCard.setArcHeight(20);
-        secondCard.setFill(Paint.valueOf("#0076a3"));
+        // StackPane for second card
+        StackPane secondCardStack = new StackPane();
 
-        Label secondCardLabel = new Label("?");
-        secondCardLabel.setFont(Font.font("Cambria", 200));
-        secondCardLabel.setTextFill(Color.web("fff"));
-        secondCardLabel.setAlignment(Pos.CENTER);
+        Image flippedCard = new Image("unflipped.png");
+        ImageView secondCard = new ImageView(flippedCard);
+        secondCard.setFitHeight(800);
+        secondCard.setFitWidth(800);
+        secondCard.setPreserveRatio(true);
 
-        secondCardHolder.getChildren().addAll(secondCard, secondCardLabel);
-        secondCardHolder.setAlignment(Pos.CENTER);
-        GridPane.setConstraints(secondCardHolder, 2, 1);
+        Label secondCardValue = new Label();
+        secondCardValue.setTextFill(Color.web("#0076a3"));
+        secondCardValue.setAlignment(Pos.CENTER_LEFT);
+        secondCardValue.setFont(Font.font("Cambria", 72));
 
-        //Score Labels at bottom
-        Label currentScore = new Label("Current Score: ");
-        GridPane.setConstraints(currentScore, 0, 2);
-        currentScore.setFont(Font.font("Cambria", 32));
-        currentScore.setTextFill(Color.web("#0076a3"));
-        currentScore.setAlignment(Pos.BASELINE_LEFT);
 
-        Label highScore = new Label("High Score: ");
-        GridPane.setConstraints(highScore, 2, 2);
-        highScore.setFont(Font.font("Cambria", 32));
-        highScore.setTextFill(Color.web("#0076a3"));
-        highScore.setAlignment(Pos.BASELINE_LEFT);
+        higherBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
+
+        lowerBtn.setOnAction(e -> Card.flipCard(secondCard, secondValue, secondCardValue));
+
+        secondCardStack.getChildren().addAll(secondCard, secondCardValue);
+        GridPane.setConstraints(secondCardStack, 2, 1);
+
 
         // Add everything to the grid
-        gridpane.getChildren().addAll(title, firstCardHolder, vbox, secondCardHolder, currentScore, highScore);
+        gridpane.getChildren().addAll(opponent, opponentMessage, firstCardStack, vbox, secondCardStack);
 
-        Scene gameScene = new Scene(new StackPane(gridpane), 640, 480);
+        Scene gameScene = new Scene(new StackPane(gridpane), stage.getWidth(), stage.getHeight());
         return gameScene;
     }
+
+
 }
 

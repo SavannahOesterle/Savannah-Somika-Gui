@@ -54,10 +54,14 @@ public class MainScene extends Main {
             var rulesAlert = new Alert(Alert.AlertType.INFORMATION);
             rulesAlert.setTitle("Higher or Lower Rules");
             rulesAlert.setHeaderText("How to Play: ");
-            rulesAlert.setContentText("There are two cards, both randomly selected and containing values between 1 and 9. \n \n" +
-                    "The first card will be revealed at the start of the game. You will have to guess if the hidden card is higher or lower than the first card \n \n" +
-                    "The game ends if you guess incorrectly three times. \n \n " +
-                    "Good luck!");
+            rulesAlert.setContentText("""
+                    There are two cards, both randomly selected and containing values between 1 and 9.\s
+                    \s
+                    The first card will be revealed at the start of the game. You will have to guess if the hidden card is higher or lower than the first card\s
+                    \s
+                    The game ends if you guess incorrectly three times.\s
+                    \s
+                     Good luck!""");
             rulesAlert.showAndWait();
         });
 
@@ -68,7 +72,7 @@ public class MainScene extends Main {
 
         // Add everything to the grid
         mainGrid.getChildren().addAll(title, vbox);
-        Scene mainScene = new Scene(new StackPane(mainGrid), 640, 480);
+        Scene mainScene = new Scene(new StackPane(mainGrid), stage.getHeight(),stage.getHeight());
         return mainScene;
     }
 }
