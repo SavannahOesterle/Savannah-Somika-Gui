@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 
 public class Scoring {
 
+    public static int score = 0;
 
     // Methods that update the characters to be happy
     public static void updateHappyBurtle(ImageView imageview) {

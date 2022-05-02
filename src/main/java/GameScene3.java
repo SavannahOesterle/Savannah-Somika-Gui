@@ -64,6 +64,11 @@ public class GameScene3 extends Main {
         startInstructions.setTextFill(Paint.valueOf("#0076a3"));
         startInstructions.setFont(Font.font("Cambria", 24));
 
+        Label currentScore = new Label ("Your current score is: " + Scoring.score);
+        currentScore.setTextFill(Paint.valueOf("#0076a3"));
+        currentScore.setFont(Font.font("Cambria", 24));
+        currentScore.setVisible(false);
+
         Button startBtn = new Button ("Let's Go!");
         startBtn.setTextFill(Paint.valueOf("#0076a3"));
         startBtn.setFont(Font.font("Cambria", 24));
@@ -73,7 +78,7 @@ public class GameScene3 extends Main {
         resetBtn.setFont(Font.font("Cambria", 24));
         resetBtn.setVisible(false);
 
-        opponentMessage.getChildren().addAll(opponentName, startInstructions, startBtn, resetBtn);
+        opponentMessage.getChildren().addAll(opponentName, startInstructions, currentScore, startBtn, resetBtn);
         opponentMessage.setAlignment(Pos.CENTER_LEFT);
         GridPane.setConstraints(opponentMessage, 2, 0);
 
@@ -139,33 +144,42 @@ public class GameScene3 extends Main {
         higherBtn.setOnAction(e -> {
             Card.flipCard(secondCard, secondValue, secondCardValue);
             secondCardValue.setVisible(true);
+            currentScore.setVisible(true);
             if(firstValue < secondValue) {
                 Scoring.updateHappyLoppy(opponent);
                 Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
                 resetBtn.setVisible(true);
+                Scoring.score += 1;
+                Scoring.updateOpponentLabel(currentScore,"You now have " + Scoring.score + " points!", null, null);
             } else {
                 Scoring.updateSadLoppy(opponent);
                 Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
                 resetBtn.setVisible(true);
+                Scoring.updateOpponentLabel(currentScore,"You still have " + Scoring.score + " points!", null, null);
             }
         });
 
         lowerBtn.setOnAction(e -> {
             Card.flipCard(secondCard, secondValue, secondCardValue);
             secondCardValue.setVisible(true);
+            currentScore.setVisible(true);
             if(firstValue > secondValue) {
                 Scoring.updateHappyLoppy(opponent);
                 Scoring.updateOpponentLabel(startInstructions, "Good job!", startBtn, "Play Again?");
                 resetBtn.setVisible(true);
+                Scoring.score += 1;
+                Scoring.updateOpponentLabel(currentScore,"You now have " + Scoring.score + " points!", null, null);
             } else {
                 Scoring.updateSadLoppy(opponent);
                 Scoring.updateOpponentLabel(startInstructions, "Better luck next time!", startBtn, "Play Again?");
                 resetBtn.setVisible(true);
+                Scoring.updateOpponentLabel(currentScore,"You still have " + Scoring.score + " points!", null, null);
             }
         });
 
         resetBtn.setOnAction(e -> {
             resetBtn.setVisible(false);
+            currentScore.setVisible(false);
             Scoring.resetLoppy(opponent);
             Scoring.resetGame(secondCard);
             secondCardValue.setVisible(false);
