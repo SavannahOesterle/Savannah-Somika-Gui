@@ -1,4 +1,7 @@
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -6,6 +9,7 @@ import javafx.scene.image.ImageView;
 public class Scoring {
 
     public static int score = 0;
+    public static int incorrectGuesses = 0;
 
     // Methods that update the characters to be happy
     public static void updateHappyBurtle(ImageView imageview) {
@@ -66,4 +70,39 @@ public class Scoring {
         Card.unflipCard(imageview);
     }
 
+
+    // Method that ends the game after three wrong guesses
+    public static void endGame(){
+        var alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("Higher or Lower");
+        alert.setHeaderText("Too many wrong guesses.");
+        alert.setContentText("You have guessed wrong too many times.");
+
+
+        ButtonType exit = new ButtonType("Exit Game");
+
+        // Button that resets the game against the current opponent
+        ButtonType resetGame = new ButtonType("Restart Game");
+
+        // Button that goes back to opponent page
+        ButtonType chooseCharacter = new ButtonType("New Opponent");
+
+        // Button that closes the game
+        alert.getButtonTypes().addAll(resetGame, chooseCharacter, exit);
+        alert.showAndWait().ifPresent((btnType) -> {
+            if(btnType == resetGame){
+                score = 0;
+                incorrectGuesses = 0;
+            } else if (btnType == chooseCharacter) {
+                score = 0;
+                incorrectGuesses = 0;
+                Main.switchCharacterScene();
+            } else {
+                Main.stage.close();
+            }
+        });
+
+
+
+    }
 }
