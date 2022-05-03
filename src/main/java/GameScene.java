@@ -208,6 +208,10 @@ public class GameScene extends Main {
                 Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
             } else {
                 Scoring.endGame();
+                Scoring.resetBurtle(opponent);
+                currentScore.setVisible(false);
+                guesses.setVisible(false);
+                Scoring.updateOpponentLabel(startInstructions, "Ready to start a new round?", resetBtn, "Start Round");
             }
         });
         secondCardStack.getChildren().addAll(secondCard, secondCardValue);

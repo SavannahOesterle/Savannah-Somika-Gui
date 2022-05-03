@@ -74,9 +74,9 @@ public class Scoring {
     // Method that ends the game after three wrong guesses
     public static void endGame(){
         var alert = new Alert(Alert.AlertType.NONE);
-        alert.setTitle("Higher or Lower");
-        alert.setHeaderText("Too many wrong guesses.");
-        alert.setContentText("You have guessed wrong too many times.");
+        alert.setTitle("Game Over: ");
+        alert.setHeaderText("You have guessed wrong too many times, and the game is over.");
+        alert.setContentText("To replay this opponent, click Restart Game. \n \n To pick a new opponent, click New Opponent. \n \n To exit the program, click Exit Game. \n \n");
 
 
         ButtonType exit = new ButtonType("Exit Game");

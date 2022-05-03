@@ -55,7 +55,7 @@ public class MainScene extends Main {
             rulesAlert.setTitle("Higher or Lower Rules");
             rulesAlert.setHeaderText("How to Play: ");
             rulesAlert.setContentText("""
-                    There are two cards, both randomly selected and containing values between 1 and 9.\s
+                    There are two cards, both randomly selected and containing values between 0 and 9.\s
                     \s
                     The first card will be revealed at the start of the game. You will have to guess if the hidden card is higher or lower than the first card\s
                     \s

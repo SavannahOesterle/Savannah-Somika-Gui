@@ -205,6 +205,10 @@ public class GameScene2 extends Main {
                 Scoring.updateOpponentLabel(startInstructions, "The first card is " + firstValue, null, null);
             } else {
                 Scoring.endGame();
+                Scoring.resetPoxie(opponent);
+                currentScore.setVisible(false);
+                guesses.setVisible(false);
+                Scoring.updateOpponentLabel(startInstructions, "Ready to start a new round?", resetBtn, "Start Round");
             }
         });
 

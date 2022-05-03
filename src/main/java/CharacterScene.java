@@ -58,6 +58,7 @@ public class CharacterScene extends Main {
 
         // Button to Choose First Character and Start Game
         Button firstCharacterName = new Button("Burtle");
+        firstCharacterName.setStyle("-fx-text-fill: #0076a3; -fx-font-size:18;");
         firstCharacterName.setAlignment(Pos.CENTER);
         firstCharacterName.setOnAction( e -> Main.switchGameScene());
 
@@ -74,6 +75,7 @@ public class CharacterScene extends Main {
 
         // Button for second character
         Button secondCharacterName = new Button("Poxie");
+        secondCharacterName.setStyle("-fx-text-fill: #0076a3; -fx-font-size:18;");
         secondCharacterName.setOnAction( e -> Main.switchGameScene2());
         secondCharacterName.setAlignment(Pos.CENTER);
 
@@ -90,6 +92,7 @@ public class CharacterScene extends Main {
 
         // Button for third character
         Button thirdCharacterName = new Button("Loppy");
+        thirdCharacterName.setStyle("-fx-text-fill: #0076a3; -fx-font-size:18;");
         thirdCharacterName.setAlignment(Pos.CENTER);
         thirdCharacterName.setOnAction( e -> Main.switchGameScene3());
 
