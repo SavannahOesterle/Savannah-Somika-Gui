@@ -40,7 +40,6 @@ public class GameScene2 extends Main {
         RowConstraints row3 = new RowConstraints();
         row3.setPercentHeight(30) ;
 
-
         // ImageView for opponent (center column)
         ImageView opponent = new ImageView();
         opponent.setFitHeight(400);
@@ -48,14 +47,11 @@ public class GameScene2 extends Main {
         opponent.setPreserveRatio(true);
 
         Image poxieImage = new Image("poxie.png");
-        //Image loppyImage = new Image("loppy.png");
-
         opponent.setImage(poxieImage);
         GridPane.setConstraints(opponent, 1, 0);
 
         // Vbox with Opponent's Text
         VBox opponentMessage = new VBox(10);
-
 
         Label opponentName = new Label("Poxie: ");
         opponentName.setTextFill(Paint.valueOf("#0076a3"));
@@ -117,6 +113,7 @@ public class GameScene2 extends Main {
         // Center Column with higher/lower buttons
         VBox vbox = new VBox(12);
         vbox.setAlignment(Pos.CENTER);
+
         Button higherBtn = new Button("Higher");
         higherBtn.setPrefHeight(40);
         higherBtn.setMinWidth(150);

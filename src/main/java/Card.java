@@ -1,9 +1,6 @@
-import javafx.geometry.Pos;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.util.Random;
 
 public class Card {
@@ -46,7 +43,10 @@ public class Card {
         label.setText ((String.valueOf(value)));
     }
 
-    // Method that resets the second card
+    /**
+     * Method that resets the second card
+     * @param imageview
+     */
     public static void unflipCard(ImageView imageview) {
         Image unflippedCard = new Image("Unflipped.png");
         imageview.setImage(unflippedCard);

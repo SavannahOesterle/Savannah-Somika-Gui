@@ -28,7 +28,6 @@ public class CharacterScene extends Main {
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setPercentWidth(33);
 
-
         // Set the height of the four rows
         RowConstraints row1 = new RowConstraints();
         row1.setPercentHeight(25);
@@ -107,3 +106,4 @@ public class CharacterScene extends Main {
 
     }
 }
+

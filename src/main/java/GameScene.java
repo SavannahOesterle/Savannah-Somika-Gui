@@ -73,7 +73,6 @@ public class GameScene extends Main {
         guesses.setFont(Font.font("Cambria", 24));
         guesses.setVisible(false);
 
-
         Button startBtn = new Button ("Let's Go!");
         startBtn.setTextFill(Paint.valueOf("#0076a3"));
         startBtn.setFont(Font.font("Cambria", 24));
@@ -83,8 +82,6 @@ public class GameScene extends Main {
         resetBtn.setFont(Font.font("Cambria", 24));
         resetBtn.setVisible(false);
 
-
-
         // Add all parts of opponent's text to the VBox
         opponentMessage.getChildren().addAll(opponentName, startInstructions, currentScore, guesses, startBtn, resetBtn);
         opponentMessage.setAlignment(Pos.CENTER_LEFT);
@@ -92,7 +89,6 @@ public class GameScene extends Main {
 
         // StackPane for first card
         StackPane firstCardStack = new StackPane();
-
         Image unflippedCard = new Image("unflipped.png");
         ImageView firstCard = new ImageView(unflippedCard);
         firstCard.setFitHeight(800);
@@ -117,8 +113,9 @@ public class GameScene extends Main {
         GridPane.setConstraints(firstCardStack, 0, 1);
 
         // Center Column with higher/lower buttons
-        VBox vbox = new VBox(12);
-        vbox.setAlignment(Pos.CENTER);
+        VBox vbox = new VBox(12);    // series of vertical box
+        vbox.setAlignment(Pos.CENTER);   // alignment
+
         Button higherBtn = new Button("Higher");
         higherBtn.setPrefHeight(40);
         higherBtn.setMinWidth(150);

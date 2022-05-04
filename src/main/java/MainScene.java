@@ -12,6 +12,8 @@ import javafx.scene.text.Font;
 
 public class MainScene extends Main {
 
+    private static Scene gameScene;
+
     public static Scene createMainScene() {
         // Create a grid and add space between the cells
         GridPane mainGrid = new GridPane();
@@ -40,9 +42,10 @@ public class MainScene extends Main {
 
         playBtn.setOnAction( e -> {
             System.out.println("HI");
+            gameScene = GameScene.createGameScene();
+            switchGameScene();
             Main.switchCharacterScene();
         });
-
 
         // Button to Display the Rules
         Button rulesBtn = new Button("Rules");
@@ -75,4 +78,8 @@ public class MainScene extends Main {
         Scene mainScene = new Scene(new StackPane(mainGrid), stage.getHeight(),stage.getHeight());
         return mainScene;
     }
+
+
+
+
 }

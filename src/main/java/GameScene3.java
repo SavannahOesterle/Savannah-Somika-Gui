@@ -46,7 +46,6 @@ public class GameScene3 extends Main {
         opponent.setFitWidth(300);
         opponent.setPreserveRatio(true);
 
-
         Image loppyImage = new Image("loppy.png");
 
         opponent.setImage(loppyImage);
@@ -54,7 +53,6 @@ public class GameScene3 extends Main {
 
         // Vbox with Opponent's Text
         VBox opponentMessage = new VBox(10);
-
 
         Label opponentName = new Label("Loppy: ");
         opponentName.setTextFill(Paint.valueOf("#0076a3"));
@@ -130,7 +128,6 @@ public class GameScene3 extends Main {
 
         vbox.getChildren().addAll(higherBtn, buttonLabel, lowerBtn);
         GridPane.setConstraints(vbox, 1, 1);
-
 
         // StackPane for second card
         StackPane secondCardStack = new StackPane();
